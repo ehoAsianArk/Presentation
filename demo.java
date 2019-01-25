@@ -1,112 +1,4 @@
-package com.hec.app.activity;
-
-import android.app.Dialog;
-import android.app.ProgressDialog;
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
-import android.graphics.Color;
-import android.os.Build;
-import android.os.Bundle;
-import android.preference.PreferenceManager;
-import android.support.v7.app.AlertDialog;
-import android.text.Editable;
-import android.text.Html;
-import android.text.TextWatcher;
-import android.util.Log;
-import android.view.Gravity;
-import android.view.KeyEvent;
-import android.view.MotionEvent;
-import android.view.View;
-import android.view.Window;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.gson.Gson;
-import com.google.gson.JsonParseException;
-import com.google.gson.reflect.TypeToken;
-import com.hec.app.R;
-import com.hec.app.activity.base.BaseActivity;
-import com.hec.app.activity.base.BaseApp;
-import com.hec.app.config.CommonConfig;
-import com.hec.app.entity.BankInfo;
-import com.hec.app.entity.BizException;
-import com.hec.app.entity.ChangePwInfo;
-import com.hec.app.entity.CityInfo;
-import com.hec.app.entity.CustomerInfo;
-import com.hec.app.entity.ProvinceInfo;
-import com.hec.app.entity.Response;
-import com.hec.app.framework.widget.MyToast;
-import com.hec.app.util.CustomerAccountManager;
-import com.hec.app.util.DialogUtil;
-import com.hec.app.util.MyAsyncTask;
-import com.hec.app.webservice.AccountService;
-import com.hec.app.webservice.ServiceException;
-import com.hec.app.webservice.WithdrawService;
-
-import java.io.IOException;
-import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.Callable;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 public class FormActivity extends BaseActivity {
-
-    private ImageView imgBack;
-    private TextView title;
-
-    private ArrayList<String> bank = new ArrayList<String>();
-    private ArrayList<Integer> bankTypeId = new ArrayList<Integer>();
-    Intent next = new Intent();
-
-    private TextView pwr;
-    private EditText et1;
-    private EditText et2;
-    private EditText et3;
-    private LinearLayout err1;
-    private LinearLayout err2;
-    private LinearLayout err3;
-    private TextView errText1;
-    private TextView errText2;
-    private TextView errText3;
-    private ImageView errCross1;
-    private ImageView errCross2;
-    private ImageView errCross3;
-    private RelativeLayout rl2;
-    private RelativeLayout rl4;
-    private RelativeLayout rl6;
-    private LinearLayout llLogout;
-    private TextView tvLogout;
-    private LinearLayout ll;
-    private ProgressDialog progressDialog;
-    private boolean mIsError;
-    private boolean pressed = false;
-    private ArrayAdapter banklist;
-    private Spinner provinceSpinner;
-    private Spinner citySpinner;
-    private EditText telephoneNo;
-    private EditText branchbank;
-    private TextView telephonecheck;
-    private List<String> cityname;
-    private List<String> provincename;
-    private List<ProvinceInfo> provinceInfos;
-    private List<CityInfo> cityInfos;
-    private boolean iscomplete = true;
-    private boolean phoneNo = true;
-    private boolean allowWithdraw = true;
-    private int tag = 0;
-    private ArrayAdapter<String> cityAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,8 +8,14 @@ public class FormActivity extends BaseActivity {
         tag = intent.getIntExtra("tag", -1);
         final int btnType = intent.getIntExtra("btn_type", -1);
 
+             /** debt
+                    6 pages in the same class
+            */
         //change login password
         if (tag == 0) {
+            /** debt
+                   meaningless tag 
+            */
             setContentView(R.layout.form_password);
             getId();
             imgBack.setOnClickListener(new View.OnClickListener() {
@@ -1060,6 +958,9 @@ public class FormActivity extends BaseActivity {
             }
         }
     }
+             /** debt
+                 nearly 1000 line of code in 1 function
+            */
 
     private void withdraw(final int bankId, final String bank) {
         MyAsyncTask<Response> task = new MyAsyncTask<Response>(FormActivity.this) {
